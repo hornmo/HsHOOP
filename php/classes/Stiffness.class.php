@@ -7,8 +7,8 @@ class Stiffness{
 	private $static_tors_stiff;
 	private $static_bend_stiff;
 	
-	public getValues() { 
-		var $retVal = array();
+	public static function getValues() { 
+		$retVal = array();
 		$retVal = array_merge($retVal, ["first_resfreq_trimmed"=>$this->first_resfreq_trimmed]);
 		$retVal = array_merge($retVal, ["second_resfreq_trimmed"=>$this->second_refreq_trimmed]);
 		$retVal = array_merge($retVal, ["first_resfreq_body"=>$this->first_resfreq_body]);

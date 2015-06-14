@@ -10,8 +10,8 @@ class JoiningPocess {
 	private $rivets;
 	private $clinch_spots;
 
-	public getValues() { 
-		var $retVal = array();
+	public static function getValues() { 
+		$retVal = array();
 		$retVal = array_merge($retVal, ["spot_welds"=>$this->spot_welds]);
 		$retVal = array_merge($retVal, ["arc_welding"=>$this->arc_welding]);
 		$retVal = array_merge($retVal, ["friction_steel_welding"=>$this->friction_steel_welding]);

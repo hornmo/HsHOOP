@@ -5,6 +5,7 @@ include_once("Stiffness.class.php");
 include_once("MaterialMix.class.php");
 include_once("JoiningProcess.class.php");
 include_once("ProductionData.class.php");
+include_once("DatabaseHandler.class.php");
 
 class CarBody {
 	private $manufacturer;
@@ -15,14 +16,20 @@ class CarBody {
 	private $materialMix; 
 	private $joiningProcess;
 	private $productionData;
-
-	static public suche($m, $n, $y = date("Y")) { 
-		return new Body; 
+	
+	static public function test($return){
+		return $return;
+	}
+	public static function suche($m, $n, $y){
+		return new Body;
+	}
+	public static function sucheNachParameter($name, $year) { 
+		$subClasses = array('lengths', 'weights', 'stiffness_data', 'material_mix', 'joining_process', 'production', 'production_sites');
+		$bodies = DatabaseHandler::getBodies($name, $year);
+		return $bodies;
 	} 
-	static public sucheNachParameter($parameters) { 
-	} 
-	public getValues() { 
-		var $retVal = array();
+	public static function getValues() { 
+		$retVal = array();
 		$retVal = array_merge($retVal, ["manufacturer"=>$this->manufacturer]);
 		$retVal = array_merge($retVal, ["name"=>$this->name]);
 		$retVal = array_merge($retVal, ["modelYear"=>$this->modelYear]);

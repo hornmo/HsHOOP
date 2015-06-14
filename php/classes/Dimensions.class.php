@@ -14,8 +14,8 @@ class Dimensions{
 	private $weight_tailgate;
 	private $weight_ffenders;
 		
-	public getValues() { 
-	var $retVal = array();
+	public static function getValues() { 
+		$retVal = array();
 		$retVal = array_merge($retVal, ["length"=>$this->length]);
 		$retVal = array_merge($retVal, ["width"=>$this->width]);
 		$retVal = array_merge($retVal, ["height"=>$this->height]);
