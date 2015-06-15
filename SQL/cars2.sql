@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `lengths` (
-`id_lengths` int(11) NOT NULL,
+`id_lengths` int(11) NOT NULL AUTO_INCREMENT,
   `length` int(11) DEFAULT NULL,
   `width` int(11) DEFAULT NULL,
   `height` int(11) DEFAULT NULL,
@@ -35,16 +35,15 @@ CREATE TABLE IF NOT EXISTS `lengths` (
   `track_rear` int(11) DEFAULT NULL,
   `track_mean` int(11) DEFAULT NULL,
   `wheelbase` int(11) DEFAULT NULL,
-  `contact_area` float DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `contact_area` float DEFAULT NULL,
+  PRIMARY KEY (id_lengths)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `lengths`
 --
 
-INSERT INTO `lengths` (`id_lengths`, `length`, `width`, `height`, `track_front`, `track_rear`, `track_mean`, `wheelbase`, `contact_area`) VALUES
-(1, 3968, 1795, 1326, 1446, 1428, 1437, 1437, 3.38),
-(2, 4455, 1903, 1265, 1512, 1578, 1545, 2632, 4.067);
+
 
 -- --------------------------------------------------------
 
@@ -53,22 +52,21 @@ INSERT INTO `lengths` (`id_lengths`, `length`, `width`, `height`, `track_front`,
 --
 
 CREATE TABLE IF NOT EXISTS `material_mix` (
-`id_material_mix` int(11) NOT NULL,
+`id_material_mix` int(11) NOT NULL AUTO_INCREMENT,
   `steel` float DEFAULT NULL,
   `aluminium` float DEFAULT NULL,
   `magnesium` float DEFAULT NULL,
   `other` float DEFAULT NULL,
   `thermoplastics` float DEFAULT NULL,
-  `control` float DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `control` float DEFAULT NULL,
+  PRIMARY KEY (id_material_mix)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `material_mix`
 --
 
-INSERT INTO `material_mix` (`id_material_mix`, `steel`, `aluminium`, `magnesium`, `other`, `thermoplastics`, `control`) VALUES
-(1, 65, 33.8, 0, 1.2, 0, 100),
-(2, 6, 22, 0, 12, 60, 100);
+
 
 -- --------------------------------------------------------
 
@@ -77,37 +75,20 @@ INSERT INTO `material_mix` (`id_material_mix`, `steel`, `aluminium`, `magnesium`
 --
 
 CREATE TABLE IF NOT EXISTS `model` (
-`id_model` int(11) NOT NULL,
+`id_model` int(11) NOT NULL AUTO_INCREMENT,
   `manufacturer` varchar(45) DEFAULT NULL,
   `name` varchar(45) DEFAULT NULL,
   `model_year` int(11) DEFAULT NULL,
   `segment` varchar(45) DEFAULT NULL,
   `internaloem` varchar(45) DEFAULT NULL,
-  `fk_id_weights` int(11) NOT NULL,
-  `fk_id_production` int(11) NOT NULL,
-  `fk_id_lengths` int(11) NOT NULL,
-  `fk_id_material_mix` int(11) NOT NULL,
-  `fk_id_parts` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+  PRIMARY KEY (id_model)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `model`
 --
 
-INSERT INTO `model` (`id_model`, `manufacturer`, `name`, `model_year`, `segment`, `internaloem`, `fk_id_weights`, `fk_id_production`, `fk_id_lengths`, `fk_id_material_mix`, `fk_id_parts`) VALUES
-(1, 'Audi', 'TT', 2014, 'C', '8S', 1, 1, 1, 1, 1),
-(2, 'BMW', 'i8', 2014, 'S', 'I12', 2, 2, 2, 2, 2),
-(3, 'Chevrolet', 'Corvette Z06', 2014, 'S', 'Y1AC Convertible', 0, 0, 0, 0, 0),
-(4, 'Chevrolet', 'Corvette Z06', 2014, 'S', 'Y1BC', 0, 0, 0, 0, 0),
-(5, 'Fiat', '500X', 2014, 'B', '334', 0, 0, 0, 0, 0),
-(6, 'Ford', 'Mustang', 2015, 'S', 'S550', 0, 0, 0, 0, 0),
-(7, 'Jaguar', 'F Type Coupé', 2014, 'S', 'X152 Coupe', 0, 0, 0, 0, 0),
-(8, 'Mazda', '2', 2014, 'B', NULL, 0, 0, 0, 0, 0),
-(9, 'Mercedes Benz', 'C-Class', 2014, 'D', 'W205', 0, 0, 0, 0, 0),
-(10, 'Peugeot', '308', 2014, 'C', 'T91', 0, 0, 0, 0, 0),
-(11, 'Renault', 'Twingo', 2014, 'A', 'R4S', 0, 0, 0, 0, 0),
-(12, 'Subaru', 'WRX', 2014, 'C', NULL, 0, 0, 0, 0, 0),
-(13, 'Volvo', 'XC 90', 2015, 'J', NULL, 0, 0, 0, 0, 0);
+
 
 -- --------------------------------------------------------
 
@@ -116,21 +97,20 @@ INSERT INTO `model` (`id_model`, `manufacturer`, `name`, `model_year`, `segment`
 --
 
 CREATE TABLE IF NOT EXISTS `parts` (
-`id` int(11) NOT NULL,
+`id` int(11) NOT NULL AUTO_INCREMENT,
   `no_parts` int(11) DEFAULT NULL,
   `parts100g` int(11) DEFAULT NULL,
   `parts1kg` int(11) DEFAULT NULL,
   `parts5kg` int(11) DEFAULT NULL,
-  `parts_more5kg` int(11) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `parts_more5kg` int(11) DEFAULT NULL,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `parts`
 --
 
-INSERT INTO `parts` (`id`, `no_parts`, `parts100g`, `parts1kg`, `parts5kg`, `parts_more5kg`) VALUES
-(1, 304, NULL, NULL, NULL, NULL),
-(2, 131, 28, 76, 18, 9);
+
 
 -- --------------------------------------------------------
 
@@ -139,21 +119,19 @@ INSERT INTO `parts` (`id`, `no_parts`, `parts100g`, `parts1kg`, `parts5kg`, `par
 --
 
 CREATE TABLE IF NOT EXISTS `production` (
-`id_production` int(11) NOT NULL,
+`id_production` int(11) NOT NULL AUTO_INCREMENT,
   `process_stability` float DEFAULT NULL,
   `re_use_factor` float DEFAULT NULL,
   `mechanisation` float DEFAULT NULL,
   `intended_production_vol` int(11) DEFAULT NULL,
-  `production_lead_time` int(11) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `production_lead_time` int(11) DEFAULT NULL,
+    PRIMARY KEY (id_production)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `production`
 --
 
-INSERT INTO `production` (`id_production`, `process_stability`, `re_use_factor`, `mechanisation`, `intended_production_vol`, `production_lead_time`) VALUES
-(1, NULL, NULL, NULL, NULL, NULL),
-(2, NULL, 0, 99, 8000, 700);
 
 -- --------------------------------------------------------
 
@@ -162,7 +140,7 @@ INSERT INTO `production` (`id_production`, `process_stability`, `re_use_factor`,
 --
 
 CREATE TABLE IF NOT EXISTS `weights` (
-`id_weights` int(11) NOT NULL,
+`id_weights` int(11) NOT NULL AUTO_INCREMENT,
   `biw` float DEFAULT NULL,
   `front_doors` float DEFAULT NULL,
   `rear_doors` float DEFAULT NULL,
@@ -172,105 +150,140 @@ CREATE TABLE IF NOT EXISTS `weights` (
   `hinges` float DEFAULT NULL,
   `fuelflap` float DEFAULT NULL,
   `frontend` float DEFAULT NULL,
-  `total` float DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `total` float DEFAULT NULL,
+    PRIMARY KEY (id_weights)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `weights`
 --
 
-INSERT INTO `weights` (`id_weights`, `biw`, `front_doors`, `rear_doors`, `hood`, `tailgate`, `front_fenders`, `hinges`, `fuelflap`, `frontend`, `total`) VALUES
-(1, 259, 20.6, NULL, 9.7, 10, 1.6, 8.6, 0, NULL, 209),
-(2, 260.2, 18.048, NULL, 7.05, 2.3, 5.6, 6.298, 0, 7.708, 229.4);
 
---
--- Indexes for dumped tables
---
 
---
--- Indexes for table `lengths`
---
-ALTER TABLE `lengths`
- ADD PRIMARY KEY (`id_lengths`);
+-- --
+-- -- Indexes for dumped tables
+-- --
 
---
--- Indexes for table `material_mix`
---
-ALTER TABLE `material_mix`
- ADD PRIMARY KEY (`id_material_mix`);
+-- --
+-- -- Indexes for table `lengths`
+-- --
+-- ALTER TABLE `lengths`
+ -- ADD PRIMARY KEY (`id_lengths`);
 
---
--- Indexes for table `model`
---
-ALTER TABLE `model`
- ADD PRIMARY KEY (`id_model`), ADD KEY `fk_model_weights1_idx` (`fk_id_weights`), ADD KEY `fk_model_production1_idx` (`fk_id_production`), ADD KEY `fk_model_lengths1_idx` (`fk_id_lengths`), ADD KEY `fk_model_material_mix1_idx` (`fk_id_material_mix`), ADD KEY `fk_model_parts1_idx` (`fk_id_parts`);
+-- --
+-- -- Indexes for table `material_mix`
+-- --
+-- ALTER TABLE `material_mix`
+ -- ADD PRIMARY KEY (`id_material_mix`);
 
---
--- Indexes for table `parts`
---
-ALTER TABLE `parts`
- ADD PRIMARY KEY (`id`);
+-- --
+-- -- Indexes for table `model`
+-- --
+-- -- ALTER TABLE `model`
+ -- ADD PRIMARY KEY (`id_model`), ADD KEY `fk_model_weights1_idx` (`fk_id_weights`), ADD KEY `fk_model_production1_idx` (`fk_id_production`), ADD KEY `fk_model_lengths1_idx` (`fk_id_lengths`), ADD KEY `fk_model_material_mix1_idx` (`fk_id_material_mix`), ADD KEY `fk_model_parts1_idx` (`fk_id_parts`);
 
---
--- Indexes for table `production`
---
-ALTER TABLE `production`
- ADD PRIMARY KEY (`id_production`);
+-- --
+-- -- Indexes for table `parts`
+-- --
+-- ALTER TABLE `parts`
+ -- ADD PRIMARY KEY (`id`);
 
---
--- Indexes for table `weights`
---
-ALTER TABLE `weights`
- ADD PRIMARY KEY (`id_weights`);
+-- --
+-- -- Indexes for table `production`
+-- --
+-- ALTER TABLE `production`
+ -- ADD PRIMARY KEY (`id_production`);
 
---
--- AUTO_INCREMENT for dumped tables
---
+-- --
+-- -- Indexes for table `weights`
+-- --
+-- ALTER TABLE `weights`
+ -- ADD PRIMARY KEY (`id_weights`);
 
---
--- AUTO_INCREMENT for table `lengths`
---
-ALTER TABLE `lengths`
-MODIFY `id_lengths` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `material_mix`
---
-ALTER TABLE `material_mix`
-MODIFY `id_material_mix` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `model`
---
-ALTER TABLE `model`
-MODIFY `id_model` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
---
--- AUTO_INCREMENT for table `parts`
---
-ALTER TABLE `parts`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `production`
---
-ALTER TABLE `production`
-MODIFY `id_production` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `weights`
---
-ALTER TABLE `weights`
-MODIFY `id_weights` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- Constraints der exportierten Tabellen
---
+-- --
+-- -- AUTO_INCREMENT for dumped tables
+-- --
+
+-- --
+-- -- AUTO_INCREMENT for table `lengths`
+-- --
+-- ALTER TABLE `lengths`
+-- MODIFY `id_lengths` int(11) NOT NULL AUTO_INCREMENT;
+-- --
+-- -- AUTO_INCREMENT for table `material_mix`
+-- --
+-- ALTER TABLE `material_mix`
+-- MODIFY `id_material_mix` int(11) NOT NULL AUTO_INCREMENT;
+-- --
+-- -- AUTO_INCREMENT for table `model`
+-- --
+-- ALTER TABLE `model`
+-- MODIFY `id_model` int(11) NOT NULL AUTO_INCREMENT;
+-- --
+-- -- AUTO_INCREMENT for table `parts`
+-- --
+-- ALTER TABLE `parts`
+-- MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+-- --
+-- -- AUTO_INCREMENT for table `production`
+-- --
+-- ALTER TABLE `production`
+-- MODIFY `id_production` int(11) NOT NULL AUTO_INCREMENT;
+-- --
+-- -- AUTO_INCREMENT for table `weights`
+-- --
+-- ALTER TABLE `weights`
+-- MODIFY `id_weights` int(11) NOT NULL AUTO_INCREMENT;
+-- --
+-- -- Constraints der exportierten Tabellen
+-- --
 
 --
 -- Constraints der Tabelle `model`
 --
-ALTER TABLE `model`
-ADD CONSTRAINT `fk_model_lengths1` FOREIGN KEY (`fk_id_lengths`) REFERENCES `lengths` (`id_lengths`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_model_material_mix1` FOREIGN KEY (`fk_id_material_mix`) REFERENCES `material_mix` (`id_material_mix`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_model_parts1` FOREIGN KEY (`fk_id_parts`) REFERENCES `parts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_model_production1` FOREIGN KEY (`fk_id_production`) REFERENCES `production` (`id_production`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-ADD CONSTRAINT `fk_model_weights1` FOREIGN KEY (`fk_id_weights`) REFERENCES `weights` (`id_weights`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+-- ALTER TABLE `model`
+-- ADD CONSTRAINT `fk_model_lengths1` FOREIGN KEY (`fk_id_lengths`) REFERENCES `lengths` (`id_lengths`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+-- ADD CONSTRAINT `fk_model_material_mix1` FOREIGN KEY (`fk_id_material_mix`) REFERENCES `material_mix` (`id_material_mix`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+-- ADD CONSTRAINT `fk_model_parts1` FOREIGN KEY (`fk_id_parts`) REFERENCES `parts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+-- ADD CONSTRAINT `fk_model_production1` FOREIGN KEY (`fk_id_production`) REFERENCES `production` (`id_production`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+-- ADD CONSTRAINT `fk_model_weights1` FOREIGN KEY (`fk_id_weights`) REFERENCES `weights` (`id_weights`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+INSERT INTO `lengths` (`length`, `width`, `height`, `track_front`, `track_rear`, `track_mean`, `wheelbase`, `contact_area`) VALUES
+(3968, 1795, 1326, 1446, 1428, 1437, 1437, 3.38),
+(4455, 1903, 1265, 1512, 1578, 1545, 2632, 4.067);
+
+INSERT INTO `material_mix` (`steel`, `aluminium`, `magnesium`, `other`, `thermoplastics`, `control`) VALUES
+(65, 33.8, 0, 1.2, 0, 100),
+(6, 22, 0, 12, 60, 100);
+
+INSERT INTO `model` (`manufacturer`, `name`, `model_year`, `segment`, `internaloem`) VALUES
+('Audi', 'TT', 2014, 'C', '8S'),
+('BMW', 'i8', 2014, 'S', 'I12'),
+('Chevrolet', 'Corvette Z06', 2014, 'S', 'Y1AC Convertible'),
+('Chevrolet', 'Corvette Z06', 2014, 'S', 'Y1BC'),
+('Fiat', '500X', 2014, 'B', '334'),
+('Ford', 'Mustang', 2015, 'S', 'S550'),
+('Jaguar', 'F Type Coupé', 2014, 'S', 'X152 Coupe'),
+('Mazda', '2', 2014, 'B', NULL),
+('Mercedes Benz', 'C-Class', 2014, 'D', 'W205'),
+('Peugeot', '308', 2014, 'C', 'T91'),
+('Renault', 'Twingo', 2014, 'A', 'R4S'),
+('Subaru', 'WRX', 2014, 'C', NULL),
+('Volvo', 'XC 90', 2015, 'J', NULL);
+
+INSERT INTO `parts` (`no_parts`, `parts100g`, `parts1kg`, `parts5kg`, `parts_more5kg`) VALUES
+(304, NULL, NULL, NULL, NULL),
+(131, 28, 76, 18, 9);
+
+INSERT INTO `production` (`process_stability`, `re_use_factor`, `mechanisation`, `intended_production_vol`, `production_lead_time`) VALUES
+(NULL, NULL, NULL, NULL, NULL),
+(NULL, 0, 99, 8000, 700);
+
+INSERT INTO `weights` (`biw`, `front_doors`, `rear_doors`, `hood`, `tailgate`, `front_fenders`, `hinges`, `fuelflap`, `frontend`, `total`) VALUES
+(259, 20.6, NULL, 9.7, 10, 1.6, 8.6, 0, NULL, 209),
+(260.2, 18.048, NULL, 7.05, 2.3, 5.6, 6.298, 0, 7.708, 229.4);
+

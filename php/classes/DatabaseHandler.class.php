@@ -9,31 +9,33 @@ class DatabaseHandler{
 		$dbh = new PDO("mysql:host=$host;dbname=$schema;port=3306;charset=utf8", $user, $password);
 		return $dbh;
 	}
-	static public function getBodies($name, $year){
+	static public function getBodies($man, $name, $year){
 		$dbh = self::createConnection('localhost', 'cars', 'root', '');
-		$select = "SELECT * FROM model WHERE ";
-		$man = "";
-		if($man){
-			$select .= "manufacturer LIKE " .$man." ";
+		$select = "SELECT * FROM `model` WHERE ";
+		if($man != ''){
+			$select .= "`manufacturer` LIKE '".$man."' ";
 		}
-		if($name){
+		if($name != ''){
 			if($man){
 				$select .= "AND ";
 			}
-			$select .="name LIKE ".$name." ";
+			$select .="`name` LIKE '".$name."' ";
 		}
-		if($year){
-			if($man && $name){
+		if($year != ''){
+			if($man || $name){
 				$select .= "AND ";
 			}
-			$select .="model_year LIKE ".$year." ";
+			$select .="`model_year` LIKE '".$year."' ";
 		}
  
-		$stmt =	 $dbh->prepare($select);
-		if($stmt->execute()){
-			$result = $stmt->fetchAll();
+		$stmt =	$dbh->prepare($select);
+		$stmt->execute();
+		$result = $stmt->fetchAll();
+		if($result){
 			return $result;
-		} 
+		}else{
+			return 'Fehler!'.$man.$name.$year.'';
+		}
 	}
 	static public function getConnected($subClass, $id){
 		$stmt = self::createConnection();

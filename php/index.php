@@ -13,7 +13,8 @@ include_once("classes/Body.class.php");
 		<div id="main">
 			<p>
 				<?php
-					echo CarBody::sucheNachParameter('TT', '2014');
+					$r = CarBody::sucheNachParameter('Chevrolet','','2014');
+					print_r($r);
 				?>
 			</p>
 		</div>

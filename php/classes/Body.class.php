@@ -21,11 +21,15 @@ class CarBody {
 		return $return;
 	}
 	public static function suche($m, $n, $y){
-		return new Body;
+		$subClasses = array('lengths', 'weights', 'material_mix', 'production');
+		$bodies = DatabaseHandler::getBodies($m, $n, $y);
+		return $bodies;
 	}
-	public static function sucheNachParameter($name, $year) { 
-		$subClasses = array('lengths', 'weights', 'stiffness_data', 'material_mix', 'joining_process', 'production', 'production_sites');
-		$bodies = DatabaseHandler::getBodies($name, $year);
+	public static function sucheNachParameter(...$parameters) {
+		
+		
+		$subClasses = array('lengths', 'weights', 'material_mix', 'production');
+		$bodies = DatabaseHandler::getBodies($parameters[0], $parameters[1], $parameters[2]);
 		return $bodies;
 	} 
 	public static function getValues() { 
