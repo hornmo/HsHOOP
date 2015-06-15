@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 15. Jun 2015 um 13:41
+-- Erstellungszeit: 15. Jun 2015 um 14:35
 -- Server Version: 5.6.20
 -- PHP-Version: 5.5.15
 
@@ -26,7 +26,6 @@ SET time_zone = "+00:00";
 -- Tabellenstruktur für Tabelle `lengths`
 --
 
-DROP TABLE IF EXISTS `lengths`;
 CREATE TABLE IF NOT EXISTS `lengths` (
 `id_lengths` int(11) NOT NULL,
   `length` int(11) DEFAULT NULL,
@@ -34,49 +33,18 @@ CREATE TABLE IF NOT EXISTS `lengths` (
   `height` int(11) DEFAULT NULL,
   `track_front` int(11) DEFAULT NULL,
   `track_rear` int(11) DEFAULT NULL,
+  `track_mean` int(11) DEFAULT NULL,
   `wheelbase` int(11) DEFAULT NULL,
-  `contact_area` float DEFAULT NULL,
-  `track_mean` int(11) DEFAULT NULL
+  `contact_area` float DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Daten für Tabelle `lengths`
 --
 
-INSERT INTO `lengths` (`id_lengths`, `length`, `width`, `height`, `track_front`, `track_rear`, `wheelbase`, `contact_area`, `track_mean`) VALUES
-(1, 3968, 1795, 1326, 1446, 1428, 1437, 3.38, 1437),
-(2, 4455, 1903, 1265, 1512, 1578, 2632, 4.067, 1545);
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `manufacturer`
---
-
-DROP TABLE IF EXISTS `manufacturer`;
-CREATE TABLE IF NOT EXISTS `manufacturer` (
-`id_manufacturer` int(11) NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `fk_id_model` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
-
---
--- Daten für Tabelle `manufacturer`
---
-
-INSERT INTO `manufacturer` (`id_manufacturer`, `name`, `fk_id_model`) VALUES
-(1, 'Audi', 0),
-(2, 'BMW', 0),
-(3, 'Chevrolet', 0),
-(4, 'Fiat', 0),
-(5, 'Ford', 0),
-(6, 'Jaguar', 0),
-(7, 'Mazda', 0),
-(8, 'Mercedes Benz', 0),
-(9, 'Peugeot', 0),
-(10, 'Renault', 0),
-(11, 'Subaru', 0),
-(12, 'Volvo', 0);
+INSERT INTO `lengths` (`id_lengths`, `length`, `width`, `height`, `track_front`, `track_rear`, `track_mean`, `wheelbase`, `contact_area`) VALUES
+(1, 3968, 1795, 1326, 1446, 1428, 1437, 1437, 3.38),
+(2, 4455, 1903, 1265, 1512, 1578, 1545, 2632, 4.067);
 
 -- --------------------------------------------------------
 
@@ -84,7 +52,6 @@ INSERT INTO `manufacturer` (`id_manufacturer`, `name`, `fk_id_model`) VALUES
 -- Tabellenstruktur für Tabelle `material_mix`
 --
 
-DROP TABLE IF EXISTS `material_mix`;
 CREATE TABLE IF NOT EXISTS `material_mix` (
 `id_material_mix` int(11) NOT NULL,
   `steel` float DEFAULT NULL,
@@ -109,9 +76,9 @@ INSERT INTO `material_mix` (`id_material_mix`, `steel`, `aluminium`, `magnesium`
 -- Tabellenstruktur für Tabelle `model`
 --
 
-DROP TABLE IF EXISTS `model`;
 CREATE TABLE IF NOT EXISTS `model` (
 `id_model` int(11) NOT NULL,
+  `manufacturer` varchar(45) DEFAULT NULL,
   `name` varchar(45) DEFAULT NULL,
   `model_year` int(11) DEFAULT NULL,
   `segment` varchar(45) DEFAULT NULL,
@@ -127,20 +94,20 @@ CREATE TABLE IF NOT EXISTS `model` (
 -- Daten für Tabelle `model`
 --
 
-INSERT INTO `model` (`id_model`, `name`, `model_year`, `segment`, `internaloem`, `fk_id_weights`, `fk_id_production`, `fk_id_lengths`, `fk_id_material_mix`, `fk_id_parts`) VALUES
-(1, 'TT', 2014, 'C', '8S', 1, 1, 1, 1, 1),
-(2, 'i8', 2014, 'S', 'I12', 2, 2, 2, 2, 2),
-(3, 'Corvette Z06', 2014, 'S', 'Y1AC Convertible', 0, 0, 0, 0, 0),
-(4, 'Corvette Z06', 2014, 'S', 'Y1BC', 0, 0, 0, 0, 0),
-(5, '500X', 2014, 'B', '334', 0, 0, 0, 0, 0),
-(6, 'Mustang', 2015, 'S', 'S550', 0, 0, 0, 0, 0),
-(7, 'F Type Coupé', 2014, 'S', 'X152 Coupe', 0, 0, 0, 0, 0),
-(8, '2', 2014, 'B', NULL, 0, 0, 0, 0, 0),
-(9, 'C-Class', 2014, 'D', 'W205', 0, 0, 0, 0, 0),
-(10, '308', 2014, 'C', 'T91', 0, 0, 0, 0, 0),
-(11, 'Twingo', 2014, 'A', 'R4S', 0, 0, 0, 0, 0),
-(12, 'WRX', 2014, 'C', NULL, 0, 0, 0, 0, 0),
-(13, 'XC 90', 2015, 'J', NULL, 0, 0, 0, 0, 0);
+INSERT INTO `model` (`id_model`, `manufacturer`, `name`, `model_year`, `segment`, `internaloem`, `fk_id_weights`, `fk_id_production`, `fk_id_lengths`, `fk_id_material_mix`, `fk_id_parts`) VALUES
+(1, 'Audi', 'TT', 2014, 'C', '8S', 1, 1, 1, 1, 1),
+(2, 'BMW', 'i8', 2014, 'S', 'I12', 2, 2, 2, 2, 2),
+(3, 'Chevrolet', 'Corvette Z06', 2014, 'S', 'Y1AC Convertible', 0, 0, 0, 0, 0),
+(4, 'Chevrolet', 'Corvette Z06', 2014, 'S', 'Y1BC', 0, 0, 0, 0, 0),
+(5, 'Fiat', '500X', 2014, 'B', '334', 0, 0, 0, 0, 0),
+(6, 'Ford', 'Mustang', 2015, 'S', 'S550', 0, 0, 0, 0, 0),
+(7, 'Jaguar', 'F Type Coupé', 2014, 'S', 'X152 Coupe', 0, 0, 0, 0, 0),
+(8, 'Mazda', '2', 2014, 'B', NULL, 0, 0, 0, 0, 0),
+(9, 'Mercedes Benz', 'C-Class', 2014, 'D', 'W205', 0, 0, 0, 0, 0),
+(10, 'Peugeot', '308', 2014, 'C', 'T91', 0, 0, 0, 0, 0),
+(11, 'Renault', 'Twingo', 2014, 'A', 'R4S', 0, 0, 0, 0, 0),
+(12, 'Subaru', 'WRX', 2014, 'C', NULL, 0, 0, 0, 0, 0),
+(13, 'Volvo', 'XC 90', 2015, 'J', NULL, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -148,7 +115,6 @@ INSERT INTO `model` (`id_model`, `name`, `model_year`, `segment`, `internaloem`,
 -- Tabellenstruktur für Tabelle `parts`
 --
 
-DROP TABLE IF EXISTS `parts`;
 CREATE TABLE IF NOT EXISTS `parts` (
 `id` int(11) NOT NULL,
   `no_parts` int(11) DEFAULT NULL,
@@ -172,7 +138,6 @@ INSERT INTO `parts` (`id`, `no_parts`, `parts100g`, `parts1kg`, `parts5kg`, `par
 -- Tabellenstruktur für Tabelle `production`
 --
 
-DROP TABLE IF EXISTS `production`;
 CREATE TABLE IF NOT EXISTS `production` (
 `id_production` int(11) NOT NULL,
   `process_stability` float DEFAULT NULL,
@@ -196,7 +161,6 @@ INSERT INTO `production` (`id_production`, `process_stability`, `re_use_factor`,
 -- Tabellenstruktur für Tabelle `weights`
 --
 
-DROP TABLE IF EXISTS `weights`;
 CREATE TABLE IF NOT EXISTS `weights` (
 `id_weights` int(11) NOT NULL,
   `biw` float DEFAULT NULL,
@@ -228,12 +192,6 @@ INSERT INTO `weights` (`id_weights`, `biw`, `front_doors`, `rear_doors`, `hood`,
 --
 ALTER TABLE `lengths`
  ADD PRIMARY KEY (`id_lengths`);
-
---
--- Indexes for table `manufacturer`
---
-ALTER TABLE `manufacturer`
- ADD PRIMARY KEY (`id_manufacturer`,`fk_id_model`), ADD KEY `fk_manufacturer_model_idx` (`fk_id_model`);
 
 --
 -- Indexes for table `material_mix`
@@ -275,11 +233,6 @@ ALTER TABLE `weights`
 ALTER TABLE `lengths`
 MODIFY `id_lengths` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `manufacturer`
---
-ALTER TABLE `manufacturer`
-MODIFY `id_manufacturer` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
---
 -- AUTO_INCREMENT for table `material_mix`
 --
 ALTER TABLE `material_mix`
@@ -307,12 +260,6 @@ MODIFY `id_weights` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- Constraints der exportierten Tabellen
 --
-
---
--- Constraints der Tabelle `manufacturer`
---
-ALTER TABLE `manufacturer`
-ADD CONSTRAINT `fk_manufacturer_model` FOREIGN KEY (`fk_id_model`) REFERENCES `model` (`id_model`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints der Tabelle `model`
