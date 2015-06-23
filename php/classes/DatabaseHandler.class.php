@@ -38,13 +38,16 @@ class DatabaseHandler{
 		}
 	}
 	static public function getConnected($subClass, $id){
-		$stmt = self::createConnection();
+		$dbh = self::createConnection('localhost', 'cars', 'root', '');
 		$select = "SELECT * FROM ".$subClass." WHERE fk_model = ".$id." ";
-		$stmt ->prepare($select);
-		if($stmt->execute()){
-			$result= $stmt->fetchAll();
-		} 
-		return $result;
+		$stmt = $dbh->prepare($select);
+		$stmt->execute();
+		$result= $stmt->fetchAll();
+		if($result){
+			return $result;
+		}else{
+			return array($subClass, 0);
+		}		
 	}
 }
 ?>

@@ -128,42 +128,9 @@ CREATE TABLE IF NOT EXISTS `cars`.`model` (
   `model_year` INT(11) NULL DEFAULT NULL,
   `segment` VARCHAR(45) NULL DEFAULT NULL,
   `internaloem` VARCHAR(45) NULL DEFAULT NULL,
-  `fk_weights` INT(11) NOT NULL,
-  `fk_production` INT(11) NOT NULL,
-  `fk_parts` INT(11) NOT NULL,
-  `fk_lengths` INT(11) NOT NULL,
-  `fk_material_mix` INT(11) NOT NULL,
-  PRIMARY KEY (`id_model`),
-  INDEX `fk_model_weights_idx` (`fk_weights` ASC),
-  INDEX `fk_model_production1_idx` (`fk_production` ASC),
-  INDEX `fk_model_parts1_idx` (`fk_parts` ASC),
-  INDEX `fk_model_lengths1_idx` (`fk_lengths` ASC),
-  INDEX `fk_model_material_mix1_idx` (`fk_material_mix` ASC),
-  CONSTRAINT `fk_model_weights`
-    FOREIGN KEY (`fk_weights`)
-    REFERENCES `cars`.`weights` (`id_weights`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_model_production`
-    FOREIGN KEY (`fk_production`)
-    REFERENCES `cars`.`production` (`id_production`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_model_parts`
-    FOREIGN KEY (`fk_parts`)
-    REFERENCES `cars`.`parts` (`id_parts`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_model_lengths`
-    FOREIGN KEY (`fk_lengths`)
-    REFERENCES `cars`.`lengths` (`id_lengths`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_model_material_mix`
-    FOREIGN KEY (`fk_material_mix`)
-    REFERENCES `cars`.`material_mix` (`id_material_mix`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `generation` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id_model`)
+)
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8;
