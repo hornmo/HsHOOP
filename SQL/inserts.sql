@@ -28,3 +28,8 @@ VALUES
 	(NULL, 0, 99, 8000, 700, (SELECT id_model FROM model WHERE name='i8' AND generation='1')),
 	(82, 0, 98, 36000, 190, (SELECT id_model FROM model WHERE name='Corvette Z06' AND generation='7'));
 	
+INSERT INTO parts (no_parts, parts100g, parts1kg, parts5kg, parts_more5kg, fk_model)
+VALUES
+	(304, NULL, NULL, NULL, NULL, (SELECT id_model FROM model WHERE name='TT' AND generation='3')),
+	(131, 28, 76, 18, 9, (SELECT id_model FROM model WHERE name='i8' AND generation='1')),
+	(749, 26, 646, 73, 4, (SELECT id_model FROM model WHERE name='Corvette Z06' AND generation='7'));
