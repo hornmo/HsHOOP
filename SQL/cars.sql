@@ -75,7 +75,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `cars`.`parts`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `cars`.`parts` (
-  `id_parts` INT(11) NOT NULL,
+  `id_parts` INT(11) NOT NULL AUTO_INCREMENT,
   `no_parts` INT(11) NULL,
   `parts100g` INT(11) NULL DEFAULT NULL,
   `parts1kg` INT(11) NULL DEFAULT NULL,
@@ -149,6 +149,7 @@ CREATE TABLE IF NOT EXISTS `cars`.`lengths` (
   `track_mean` INT(11) NULL DEFAULT NULL,
   `wheelbase` INT(11) NULL DEFAULT NULL,
   `contact_area` FLOAT NULL DEFAULT NULL,
+  `total` FLOAT NULL DEFAULT NULL,
   `fk_model` INT(11) NOT NULL,
   PRIMARY KEY (`id_lengths`),
   INDEX `fk_lengths_model1_idx` (`fk_model` ASC),
