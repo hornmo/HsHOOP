@@ -1,10 +1,10 @@
-INSERT IGNORE INTO `cars`.`model` (manufacturer, name, generation, model_year, segment, internaloem)
+INSERT IGNORE INTO `cars`.`model` (manufacturer, name, generation, model_year, sop, segment, internaloem)
 VALUES
-	('Audi', 'TT', 3, 2014, 'C', '8S'),
-	('BMW', 'i8', 1, 2014, 'S', 'I12'),
-	('Chevrolet', 'Corvette Z06', 7, 2014, 'S', 'Y1BC');
+	('Audi', 'TT', 3, 2014, "July 2014", 'C', '8S'),
+	('BMW', 'i8', 1, 2014, "March 2014", 'S', 'I12'),
+	('Chevrolet', 'Corvette Z06', "Nov 14", 7, 2014, 'S', 'Y1BC');
 
-INSERT IGNORE INTO `cars`.`lengths` (length, width, height, track_front, track_rear, track_mean, wheelbase, contact_area, total, fk_model)
+INSERT IGNORE INTO `cars`.`dimensions` (length, width, height, track_front, track_rear, track_mean, wheelbase, contact_area, total, fk_model)
 VALUES 
 	(3968, 1795, 1326, 1446, 1428, 1437, 2355, 3.38, 259, (SELECT DISTINCT id_model FROM model WHERE name='TT' AND generation='3')),
 	(4455, 1903, 1265, 1512, 1578, 1545, 2632, 4.067, 260.2, (SELECT DISTINCT id_model FROM model WHERE name='i8' AND generation='1')),
