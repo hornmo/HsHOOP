@@ -9,8 +9,14 @@ class JoiningPocess {
 	private $adhesive_joining;
 	private $rivets;
 	private $clinch_spots;
+	
+	public function getByID($id){
+		$joi = DatabaseHandler::getConnected("joining_process", $id);
+		$joi = $joi[0];
+		return $joi;
+	}
 
-	public static function getValues() { 
+	public function getValues() { 
 		$retVal = array();
 		$retVal = array_merge($retVal, ["spot_welds"=>$this->spot_welds]);
 		$retVal = array_merge($retVal, ["arc_welding"=>$this->arc_welding]);

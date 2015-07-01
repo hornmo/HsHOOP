@@ -10,7 +10,7 @@ class User /* extends DBOObject */ {
 	private $roles; 
 	// eine Methode, um das Singleton zurückzugeben 
 	public static function get() { 
-		if (empty(self::userSingleton)) { 
+		if (empty(self::$userSingleton)) { 
 			if (isset($_SERVER['PHP_AUTH_USER'])) {
 				$userName = $_SERVER['PHP_AUTH_USER'];
 			}				
@@ -21,9 +21,9 @@ class User /* extends DBOObject */ {
 				$userName = "unknownUser";
 			} 
 			// verwenden des privaten Konstruktors, um das Singleton zu erzeugen 
-			$this->userSingleton = new User($userName); 
+			self::$userSingleton = new User($userName); 
 		} 
-		return $this->userSingleton; 
+		return self::$userSingleton; 
 	} 
 	// die Methode, die prüft, ob der Benutzer Zugriff auf ein Array von Karossserien (oder eine einzelne Karosserie) hat 
 	// gibt immer ein Array aller erlaubten Karosserien zurück (ggf. ein leeres) 

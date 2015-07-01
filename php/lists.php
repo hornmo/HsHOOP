@@ -11,9 +11,6 @@ include_once("classes/Body.class.php");
 
 		<div id="main">
 			<p>
-				<a href="lists.php">Suche nach Kriterien</a>
-			</p>
-			<p>
 				<form method="post">
 					<p>
 						<div>Hersteller: </div><input name="manufacturer"></input>
@@ -24,19 +21,6 @@ include_once("classes/Body.class.php");
 					<p>
 						<div>Modelljahr: </div><input name="model_year"></input>
 					</p>
-					<p>
-						<span>Segment: </span>
-						<select name="segment">
-							<option>A</option>
-							<option>B</option>
-							<option>C</option>
-							<option>D</option>
-							<option>S</option>
-							<option>J</option>
-						</select>
-					</p>
-					<p>
-						<div>OEM: </div><input name="internaloem"></input>
 					<p>
 						<input type="submit"></input>
 					</p>
@@ -49,24 +33,19 @@ include_once("classes/Body.class.php");
 						foreach($atrs['_POST'] AS $k => $v){
 							if($v != ''){
 								$vars = true;
-								$l = array('manufacturer','name','internaloem','segment');
-								if(!in_array($k,$l)){
-									$parameters .= $k."=".$v."&";
-								}
 							}
 						}
 					}
-					if(isset($_POST['manufacturer']) && $_POST['manufacturer'] != ''){
-						$parameters .= "manufacturer='%".$_POST['manufacturer']."%'&";
+					if(isset($_POST['manufacturer'])){
+						$parameters .= "manufacturer='".$_POST['manufacturer']."%'";
 					}
 					if(isset($_POST['name']) && $_POST['name'] != ''){
-						$parameters .= "name='%".$_POST['name']."%'&";
+						$parameters .= "name='".$_POST['name']."%'";
 					}
-					if(isset($_POST['segment'])){
-						$parameters .= "segment='".$_POST['segment']."'&";
+					if(isset($_POST['year'])){
+						$parameters .= "year=".$_POST['year'];
 					}
 					if($vars){
-						print_r($parameters);
 						$body = CarBody::sucheNachParameter($parameters);
 						echo '<table style="border:1px solid black;">';
 						echo '<thead>';
@@ -93,29 +72,25 @@ include_once("classes/Body.class.php");
 						echo '</table>';
 					}
 				?>
+				<p>
 				<?php
-					$r = CarBody::suche('Chevrolet','','2014');
-					$arr = $r[0]->getValues();
-					print_r($arr);
+					// $r = CarBody::suche('Chevrolet','','2014');
+					// echo '!suche!';
+					// print_r($r);
 				?>
+				</p>
 			</p>
 			<p>
-				<?php
-					// $v = CarBody::sucheNachParameter("manufacturer='Chevr%'&name='Corve%'");
+				// <?php
+					// $v = CarBody::sucheNachParameter("manufacturer='Chevrolet'");
+					// echo '!parameters!';
 					// print_r($v);
-				?>
-			</p>
-			<p>
-				<?php
-					$v = Dimensions::getByID(3);
-					var_dump($v);
-				?>
+				// ?>
 			</p>
 			<table>
 				<thead>
 				<?php
-					$c = CarBody::showDetails(3);
-					print_r($c);
+					echo '<th></th>';
 				?>
 				</thead>
 				<tbody>

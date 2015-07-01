@@ -7,7 +7,13 @@ class Stiffness{
 	private $static_tors_stiff;
 	private $static_bend_stiff;
 	
-	public static function getValues() { 
+	public function getByID($id){
+		$sti = DatabaseHandler::getConnected("stiffness", $id);
+		$sti = $sti[0];
+		return $sti;
+	}
+	
+	public function getValues() { 
 		$retVal = array();
 		$retVal = array_merge($retVal, ["first_resfreq_trimmed"=>$this->first_resfreq_trimmed]);
 		$retVal = array_merge($retVal, ["second_resfreq_trimmed"=>$this->second_refreq_trimmed]);

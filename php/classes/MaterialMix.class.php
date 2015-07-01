@@ -12,6 +12,12 @@ class MaterialMix{
 	private $thermoplastics;
 	private $elastomers;
 	
+	public function getByID($id){
+		$dim = DatabaseHandler::getConnected("dimensions", $id);
+		$dim = $dim[0];
+		return $dim;
+	}
+	
 	public static function getValues() { 
 		$retVal = array();
 		$retVal = array_merge($retVal, ["low_strength_steel"=>$this->low_strength_steel]);
