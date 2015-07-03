@@ -130,6 +130,7 @@ CREATE TABLE IF NOT EXISTS `cars`.`model` (
   `segment` VARCHAR(45) NULL DEFAULT NULL,
   `internaloem` VARCHAR(45) NULL DEFAULT NULL,
   `generation` INT(11) NULL DEFAULT NULL,
+  `temp_table_id` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id_model`)
 )
 ENGINE = InnoDB
