@@ -191,7 +191,7 @@ SELECT ct.no_parts, ct.parts100g, ct.parts1kg, ct.parts5kg, ct.parts_more5kg, cm
 FROM cars_temp AS ct, cars.model AS cm
 WHERE ct.id_temp = cm.temp_table_id;
 
-  -- -----------------------------------------------------
+-- -----------------------------------------------------
 -- DROP TEMPORARY TABLE
 -- -----------------------------------------------------
 
