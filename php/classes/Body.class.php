@@ -1,12 +1,17 @@
 <?php
 
+// Klassen für Karosseriedetails
+
 include_once("Dimensions.class.php");
 include_once("Stiffness.class.php");
 include_once("MaterialMix.class.php");
 include_once("JoiningProcess.class.php");
 include_once("Production.class.php");
-include_once("DatabaseHandler.class.php");
 include_once("Weights.class.php");
+include_once("Parts.class.php");
+
+// Verwendete Klasse für Datenbankabfragen
+include_once("DatabaseHandler.class.php");
 
 class CarBody {
 	private $manufacturer;
@@ -24,34 +29,63 @@ class CarBody {
 	private $parts;
 	private $weights;
 	
+	// Suche Karosserie nach Hersteller, Name, Jahr (nicht optimal, da Duplikate nicht vermneidbar! -> benutze showDetails() ) 
+	
 	public static function suche($m, $n, $y){
 		$model = DatabaseHandler::getBodyByPars($m, $n, $y);
-		$id = $model[0]->id_model;
-		$model[0]->dimensions = Dimensions::getByID($id);
-		$model[0]->weights = Weights::getByID($id);
-		$model[0]->stiffness = Stiffness::getByID($id);
+		$model = $model[0];
+		$id = $model->id_model;
+
 		return $model;
 	}
+	
+	// Gibt Objekt zurück mit allen Details
+	
 	public static function showDetails($id){
-		$subClasses = array('dimensions', 'weights', 'material_mix', 'production', 'parts');
 		$model = DatabaseHandler::getBodyByID($id);
-		$m['model'] = $model;
-		return $m;
+		$model->dimensions = Dimensions::getByID($id);
+		$model->weights = Weights::getByID($id);
+		$model->stiffness = Stiffness::getByID($id);
+		$model->materialMix = MaterialMix::getByID($id);
+		$model->joiningProcess = JoiningProcess::getByID($id);
+		$model->production = Production::getByID($id);
+		$model->parts = Parts::getByID($id);
+		if(is_object($model)){
+			return $model;
+		}
 	}
+	
+	// Suche nach beliebig vielen verknüpften Kriterien -> Gibt ein Array von Objekten zurück
+	
 	public static function sucheNachParameter($parameters) {
 		
 		$bodies = DatabaseHandler::getBodies($parameters);
-		return $bodies;
+		if(is_object($bodies[0])){
+			return $bodies;
+		}else{
+			return 'Leere Ergebnismenge für gegebene Parameter';
+		}
 	}
+	
+	// Neue Karrosserie in die Datenbank einfügen
+	
 	public static function insertBody($parameters) {
 		$insert = DatabaseHandler::insertBody($parameters);
 		return $insert;
 	}
+	
+	// Gibt ein CarBody-Objekt als Array zurück
+	
 	public function getValues() { 
 		$retVal = array();
-		$retVal = array_merge($retVal, ["manufacturer"=>$this->manufacturer]);
-		$retVal = array_merge($retVal, ["name"=>$this->name]);
-		$retVal = array_merge($retVal, ["modelYear"=>$this->model_year]);
+		$retVal = array_merge($retVal, ["model"=>[]]);
+		$retVal['model']['manufacturer'] = $this->manufacturer;
+		$retVal['model']['name'] = $this->name;
+		$retVal['model']['model_year'] = $this->model_year;
+		$retVal['model']['generation'] = $this->generation;
+		$retVal['model']['id_model'] = $this->id_model;
+		$retVal['model']['internaloem'] = $this->internaloem;
+		$retVal['model']["segment"] = $this->segment;
 		if(is_object($this->dimensions)){
 			$retVal = array_merge($retVal, ["dimensions"=>$this->dimensions->getValues()]);
 		}
@@ -69,6 +103,9 @@ class CarBody {
 		}
 		if(is_object($this->production)){
 			$retVal = array_merge($retVal, ["production"=>$this->production->getValues()]);
+		}		
+		if(is_object($this->parts)){
+			$retVal = array_merge($retVal, ["parts"=>$this->parts->getValues()]);
 		}
 		return $retVal;
 		}

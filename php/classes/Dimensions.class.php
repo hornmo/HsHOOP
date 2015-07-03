@@ -10,13 +10,16 @@ class Dimensions{
 	private $contact_area;
 	private $dimensions_total;
 	
-	public function getByID($id){
+	// Gibt ein Objekt der Klasse für die gegebene Karosserie-ID zurück
+	
+	public static function getByID($id){
 		$dim = DatabaseHandler::getConnected("dimensions", $id);
-		$dim = $dim[0];
 		if(is_object($dim)){
 			return $dim;
 		}
 	}
+	
+	// Gibt die Attribute der Klasse als Array zurück
 		
 	public function getValues() { 
 		$retVal = array();

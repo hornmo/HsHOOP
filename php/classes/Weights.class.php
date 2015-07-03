@@ -11,11 +11,14 @@ class Weights{
 	private $frontend;
 	private $weight_total;
 	
-	public function getByID($id){
+	// Gibt ein Objekt der Klasse für die gegebene Karosserie-ID zurück
+	
+	public static function getByID($id){
 		$we = DatabaseHandler::getConnected("weights", $id);
-		$we = $we[0];
 		return $we;
 	}
+	
+	// Gibt die Attribute der Klasse als Array zurück
 	
 	public function getValues() { 
 		$retVal = array();

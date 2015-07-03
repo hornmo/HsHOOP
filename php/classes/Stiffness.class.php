@@ -7,11 +7,14 @@ class Stiffness{
 	private $static_tors_stiff;
 	private $static_bend_stiff;
 	
-	public function getByID($id){
+	// Gibt ein Objekt der Klasse für die gegebene Karosserie-ID zurück	
+
+	public static function getByID($id){
 		$sti = DatabaseHandler::getConnected("stiffness", $id);
-		$sti = $sti[0];
 		return $sti;
 	}
+	
+	// Gibt die Attribute der Klasse als Array zurück
 	
 	public function getValues() { 
 		$retVal = array();

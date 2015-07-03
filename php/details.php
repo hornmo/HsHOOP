@@ -13,6 +13,7 @@ include_once("classes/Body.class.php");
 			if(isset($_GET['id'])){
 				$id = $_GET['id'];
 				$body = CarBody::showDetails($id);
+				$body = $body->getValues();
 			}
 			echo '<table>';
 			echo '<thead>';
@@ -28,7 +29,7 @@ include_once("classes/Body.class.php");
 				echo '</thead>';
 				echo '<tbody>';
 				foreach($b AS $key => $value){
-					echo '<tr style="border-bottom:1px solid black;"><td>'.$key.'</td><td style="border-left:1px solid black;min-width:30px;text-align:right;">'.$value.'</td></tr>';
+					echo '<tr><td>'.$key.'</td><td style="min-width:30px;text-align:right;">'.$value.'</td></tr>';
 				}
 				echo '</tbody>';
 				echo '</table>';

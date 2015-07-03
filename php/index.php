@@ -25,13 +25,17 @@ include_once("classes/Body.class.php");
 						<div>Modelljahr: </div><input name="model_year"></input>
 					</p>
 					<p>
-						<span>Segment: </span>
+						<span>Fahrzeugklasse: </span>
 						<select name="segment">
+							<option></option>
 							<option>A</option>
 							<option>B</option>
 							<option>C</option>
 							<option>D</option>
+							<option>E</option>
+							<option>F</option>
 							<option>S</option>
+							<option>M</option>
 							<option>J</option>
 						</select>
 					</p>
@@ -51,52 +55,54 @@ include_once("classes/Body.class.php");
 								$vars = true;
 								$l = array('manufacturer','name','internaloem','segment');
 								if(!in_array($k,$l)){
-									$parameters .= $k."=".$v."&";
+									$parameters .= $k."=".$v;
+								}else{
+									$parameters .= $k."='%".$v."%'"; 
 								}
+								$parameters .= "&";
 							}
 						}
-					}
-					if(isset($_POST['manufacturer']) && $_POST['manufacturer'] != ''){
-						$parameters .= "manufacturer='%".$_POST['manufacturer']."%'&";
-					}
-					if(isset($_POST['name']) && $_POST['name'] != ''){
-						$parameters .= "name='%".$_POST['name']."%'&";
-					}
-					if(isset($_POST['segment'])){
-						$parameters .= "segment='".$_POST['segment']."'&";
+						$parameters = substr($parameters, 0, -1);
 					}
 					if($vars){
-						print_r($parameters);
-						$body = CarBody::sucheNachParameter($parameters);
-						echo '<table style="border:1px solid black;">';
-						echo '<thead>';
-						foreach($body[0] AS $k => $b){
-							echo '<th>'.$k.'</th>';
-						}
-						echo '<th>Details</th>';
-						echo '</thead>';
-						echo '<tbody>';
-						foreach($body AS $col){
-							if($col['id_model']){
-								$id = $col['id_model'];
+						$bodies = CarBody::sucheNachParameter($parameters);
+						echo '<p>Ergebnis für Suche nach: '.$parameters.'</p>';
+						if(is_object($bodies[0])){
+							echo '<table style="border:1px solid black;">';
+							echo '<thead>';
+							$body = $bodies[0]->getValues();
+							foreach($body['model'] AS $k => $b){
+								echo '<th>'.$k.'</th>';
 							}
-							echo '<tr>';
-							foreach($col AS $k => $b){
-								echo '<td>';
-								echo $b;
-								echo '</td>';
+							echo '<th>Details</th>';
+							echo '</thead>';
+							echo '<tbody>';
+							foreach($bodies AS $b){
+								$b = $b->getValues();
+								$id = NULL;
+								echo '<tr>';
+								foreach($b['model'] AS $key => $col){
+									if($key == 'id_model'){
+										$id = $col;
+									}
+									echo '<td>';
+									echo $col;
+									echo '</td>';
+								}
+								echo '<td><a href="details.php?id='.$id.'">Details anzeigen</a></td>';
+								echo '</tr>';
 							}
-							echo '<td><a href="details.php?id='.$id.'">Details anzeigen</a></td>';
-							echo '</tr>';
+							echo '</tbody>';
+							echo '</table>';
+						}else{
+							echo $bodies;
 						}
-						echo '</tbody>';
-						echo '</table>';
 					}
 				?>
 				<?php
-					$r = CarBody::suche('Chevrolet','','2014');
-					$arr = $r[0]->getValues();
-					print_r($arr);
+					// $r = CarBody::suche('Chevrolet','','2014');
+					// $arr = $r->getValues();
+					// print_r($arr);
 				?>
 			</p>
 			<p>
@@ -107,15 +113,15 @@ include_once("classes/Body.class.php");
 			</p>
 			<p>
 				<?php
-					$v = Dimensions::getByID(3);
-					var_dump($v);
+					// $v = Dimensions::getByID(3);
+					// var_dump($v);
 				?>
 			</p>
 			<table>
 				<thead>
 				<?php
-					$c = CarBody::showDetails(3);
-					print_r($c);
+					// $c = CarBody::showDetails(3);
+					// print_r($c);
 				?>
 				</thead>
 				<tbody>

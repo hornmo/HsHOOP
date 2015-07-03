@@ -1,5 +1,5 @@
 <?php
-class JoiningPocess {
+class JoiningProcess {
 	private $spot_welds;
 	private $arc_welding;
 	private $friction_steel_welding;
@@ -10,11 +10,14 @@ class JoiningPocess {
 	private $rivets;
 	private $clinch_spots;
 	
-	public function getByID($id){
+	// Gibt ein Objekt der Klasse für die gegebene Karosserie-ID zurück
+	
+	public static function getByID($id){
 		$joi = DatabaseHandler::getConnected("joining_process", $id);
-		$joi = $joi[0];
 		return $joi;
 	}
+	
+	// Gibt die Attribute der Klasse als Array zurück
 
 	public function getValues() { 
 		$retVal = array();
