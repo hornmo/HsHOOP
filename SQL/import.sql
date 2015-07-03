@@ -1,14 +1,9 @@
--- -----------------------------------------------------
--- CREATING TEMPORARY TABLE
--- -----------------------------------------------------
-
-DROP TABLE IF EXISTS `cars_temp`;
 
 -- -----------------------------------------------------
 -- TABLE `cars_temp`
 -- -----------------------------------------------------
 
-CREATE TEMPORARY TABLE IF NOT EXISTS `cars_temp` (
+CREATE TABLE IF NOT EXISTS `cars_temp` (
   `id_temp` INT(11) NOT NULL AUTO_INCREMENT,
   `manufacturer` VARCHAR(45) NULL DEFAULT NULL,
   `name` VARCHAR(45) NULL DEFAULT NULL,
@@ -54,7 +49,6 @@ CREATE TEMPORARY TABLE IF NOT EXISTS `cars_temp` (
   PRIMARY KEY (`id_temp`)
 )
 ENGINE = InnoDB
-AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
@@ -191,8 +185,4 @@ SELECT ct.no_parts, ct.parts100g, ct.parts1kg, ct.parts5kg, ct.parts_more5kg, cm
 FROM cars_temp AS ct, cars.model AS cm
 WHERE ct.id_temp = cm.temp_table_id;
 
-  -- -----------------------------------------------------
--- DROP TEMPORARY TABLE
--- -----------------------------------------------------
-
-DROP TABLE cars_temp;
+DELETE FROM cars_temp;
