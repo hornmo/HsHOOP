@@ -162,29 +162,34 @@ UPDATE cars_temp SET parts_more5kg = NULL WHERE(parts_more5kg='' OR 'n.sp.' OR '
 -- INSERT INTO SCHEMA
 -- -----------------------------------------------------
 
-INSERT IGNORE INTO `cars`.`model` (manufacturer, name, generation, model_year, sop, segment, internaloem)
-SELECT DISTINCT ct.manufacturer, ct.name, ct.generation, ct.model_year, ct.sop, ct.segment, ct.internaloem
+INSERT IGNORE INTO `cars`.`model` (manufacturer, name, generation, model_year, sop, segment, internaloem, temp_table_id)
+SELECT DISTINCT ct.manufacturer, ct.name, ct.generation, ct.model_year, ct.sop, ct.segment, ct.internaloem, ct.id_temp
 FROM cars_temp AS ct;
 
 INSERT IGNORE INTO `cars`.`dimensions` (length, width, height, track_front, track_rear, track_mean, wheelbase, contact_area, total, fk_model)
-SELECT DISTINCT ct.length, ct.width, ct.height, ct.track_front, ct.track_rear, ct.track_mean, ct.wheelbase, ct.contact_area, ct.total, cm.id_model
-FROM cars_temp AS ct, cars.model AS cm;
+SELECT ct.length, ct.width, ct.height, ct.track_front, ct.track_rear, ct.track_mean, ct.wheelbase, ct.contact_area, ct.total, cm.id_model
+FROM cars_temp AS ct, cars.model AS cm
+WHERE ct.id_temp = cm.temp_table_id;
 
 INSERT IGNORE INTO `cars`.`weights` (front_doors, rear_doors, hood, tailgate, front_fenders, hinges, fuelflap, frontend, total, fk_model)
-SELECT DISTINCT ct.front_doors, ct.rear_doors, ct.hood, ct.tailgate, ct.front_fenders, ct.hinges, ct.fuelflap, ct.frontend, ct.total_weight, cm.id_model
-FROM cars_temp AS ct, cars.model AS cm;
+SELECT ct.front_doors, ct.rear_doors, ct.hood, ct.tailgate, ct.front_fenders, ct.hinges, ct.fuelflap, ct.frontend, ct.total_weight, cm.id_model
+FROM cars_temp AS ct, cars.model AS cm
+WHERE ct.id_temp = cm.temp_table_id;
 
 INSERT IGNORE INTO `cars`.`material_mix` (steel, aluminium, magnesium, thermoplastics, other, control, fk_model) 
-SELECT DISTINCT ct.steel, ct.aluminium, ct.magnesium, ct.thermoplastics, ct.other, ct.control, cm.id_model
-FROM cars_temp AS ct, cars.model AS cm;
+SELECT ct.steel, ct.aluminium, ct.magnesium, ct.thermoplastics, ct.other, ct.control, cm.id_model
+FROM cars_temp AS ct, cars.model AS cm
+WHERE ct.id_temp = cm.temp_table_id;
 
 INSERT IGNORE INTO `cars`.`production` (process_stability, re_use_factor, mechanisation, intended_production_vol, production_lead_time, fk_model)
-SELECT DISTINCT ct.process_stability, ct.re_use_factor, ct.mechanisation, ct.intended_production_vol, ct.production_lead_time, cm.id_model
-FROM cars_temp AS ct, cars.model AS cm;
+SELECT ct.process_stability, ct.re_use_factor, ct.mechanisation, ct.intended_production_vol, ct.production_lead_time, cm.id_model
+FROM cars_temp AS ct, cars.model AS cm
+WHERE ct.id_temp = cm.temp_table_id;
 
 INSERT IGNORE INTO `cars`.`parts` (no_parts, parts100g, parts1kg, parts5kg, parts_more5kg, fk_model)
-SELECT DISTINCT ct.no_parts, ct.parts100g, ct.parts1kg, ct.parts5kg, ct.parts_more5kg, cm.id_model
-FROM cars_temp AS ct, cars.model AS cm;
+SELECT ct.no_parts, ct.parts100g, ct.parts1kg, ct.parts5kg, ct.parts_more5kg, cm.id_model
+FROM cars_temp AS ct, cars.model AS cm
+WHERE ct.id_temp = cm.temp_table_id;
 
   -- -----------------------------------------------------
 -- DROP TEMPORARY TABLE
