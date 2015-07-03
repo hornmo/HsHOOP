@@ -2,7 +2,7 @@ INSERT IGNORE INTO `cars`.`model` (manufacturer, name, generation, model_year, s
 VALUES
 	('Audi', 'TT', 3, 2014, "July 2014", 'C', '8S'),
 	('BMW', 'i8', 1, 2014, "March 2014", 'S', 'I12'),
-	('Chevrolet', 'Corvette Z06', "Nov 14", 7, 2014, 'S', 'Y1BC');
+	('Chevrolet', 'Corvette Z06', 7, 2014, "Nov 14", 'S', 'Y1BC');
 
 INSERT IGNORE INTO `cars`.`dimensions` (length, width, height, track_front, track_rear, track_mean, wheelbase, contact_area, total, fk_model)
 VALUES 
