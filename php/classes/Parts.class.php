@@ -9,7 +9,7 @@ class Parts{
 	// Gibt ein Objekt der Klasse für die gegebene Karosserie-ID zurück
 	
 	public static function getByID($id){
-		$par = DatabaseHandler::getConnected("parts", $id);
+		$par = DatabaseHandler::getConnected("parts", "Parts", $id);
 		return $par;
 	}
 	

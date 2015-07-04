@@ -7,17 +7,17 @@ class MaterialMix{
 	private $uhss;
 	private $aluminium;
 	private $magnesium;
-	private $other;
 	private $steel;
 	private $frp;
 	private $smc;
 	private $thermoplastics;
 	private $elastomers;
+	private $other;
 	
 	// Gibt ein Objekt der Klasse für die gegebene Karosserie-ID zurück
 	
 	public static function getByID($id){
-		$dim = DatabaseHandler::getConnected("material_mix", $id);
+		$dim = DatabaseHandler::getConnected("material_mix", "materialMix", $id);
 		return $dim;
 	}
 	

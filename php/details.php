@@ -37,7 +37,6 @@ include_once("classes/Body.class.php");
 			}
 			echo '</tbody>';
 			echo '<table>';
-			print_r($body);
 		?>
 		</div>
 	</body>

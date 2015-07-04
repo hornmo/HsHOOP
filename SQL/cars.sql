@@ -21,6 +21,26 @@ CREATE SCHEMA IF NOT EXISTS `cars` DEFAULT CHARACTER SET utf8 ;
 USE `cars` ;
 
 -- -----------------------------------------------------
+-- Table `cars`.`model`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `cars`.`model` (
+  `id_model` INT(11) NOT NULL AUTO_INCREMENT,
+  `manufacturer` VARCHAR(45) NULL DEFAULT NULL,
+  `name` VARCHAR(45) NULL DEFAULT NULL,
+  `model_year` INT(11) NULL DEFAULT NULL,
+  `sop` VARCHAR(45) NULL DEFAULT NULL,
+  `segment` VARCHAR(45) NULL DEFAULT NULL,
+  `internaloem` VARCHAR(45) NULL DEFAULT NULL,
+  `generation` INT(11) NULL DEFAULT NULL,
+  `temp_table_id` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id_model`)
+)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
 -- Table `cars`.`weights`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `cars`.`weights` (
@@ -41,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `cars`.`weights` (
   CONSTRAINT `fk_weights_model1`
     FOREIGN KEY (`fk_model`)
     REFERENCES `cars`.`model` (`id_model`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
@@ -64,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `cars`.`production` (
   CONSTRAINT `fk_production_model1`
     FOREIGN KEY (`fk_model`)
     REFERENCES `cars`.`model` (`id_model`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
@@ -87,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `cars`.`parts` (
   CONSTRAINT `fk_parts_model1`
     FOREIGN KEY (`fk_model`)
     REFERENCES `cars`.`model` (`id_model`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
@@ -111,28 +131,8 @@ CREATE TABLE IF NOT EXISTS `cars`.`material_mix` (
   CONSTRAINT `fk_material_mix_model1`
     FOREIGN KEY (`fk_model`)
     REFERENCES `cars`.`model` (`id_model`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-AUTO_INCREMENT = 1
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `cars`.`model`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `cars`.`model` (
-  `id_model` INT(11) NOT NULL AUTO_INCREMENT,
-  `manufacturer` VARCHAR(45) NULL DEFAULT NULL,
-  `name` VARCHAR(45) NULL DEFAULT NULL,
-  `model_year` INT(11) NULL DEFAULT NULL,
-  `sop` VARCHAR(45) NULL DEFAULT NULL,
-  `segment` VARCHAR(45) NULL DEFAULT NULL,
-  `internaloem` VARCHAR(45) NULL DEFAULT NULL,
-  `generation` INT(11) NULL DEFAULT NULL,
-  `temp_table_id` INT(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id_model`)
-)
 ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8;
@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `cars`.`dimensions` (
   CONSTRAINT `fk_dimensions_model1`
     FOREIGN KEY (`fk_model`)
     REFERENCES `cars`.`model` (`id_model`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 AUTO_INCREMENT = 1

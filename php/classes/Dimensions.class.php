@@ -13,7 +13,7 @@ class Dimensions{
 	// Gibt ein Objekt der Klasse für die gegebene Karosserie-ID zurück
 	
 	public static function getByID($id){
-		$dim = DatabaseHandler::getConnected("dimensions", $id);
+		$dim = DatabaseHandler::getConnected("dimensions", "Dimensions", $id);
 		if(is_object($dim)){
 			return $dim;
 		}

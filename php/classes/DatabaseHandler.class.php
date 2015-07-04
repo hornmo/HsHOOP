@@ -75,9 +75,9 @@ class DatabaseHandler{
 	
 	// Stellt eine DB-Abfrage für eine untergeordnete Klasse einer Karosserie und gibt ein Objekt dieser Klasse zurück
 	
-	static public function getConnected($subClass, $id){
+	static public function getConnected($table, $subClass, $id){
 		$dbh = self::createConnection(self::$host, self::$schema, self::$user, self::$password);
-		$select = "SELECT * FROM ".$subClass." WHERE fk_model = ".$id." ";
+		$select = "SELECT * FROM ".$table." WHERE fk_model = ".$id." ";
 		try{
 			$stmt = $dbh->prepare($select);
 			$stmt->execute();
@@ -90,14 +90,14 @@ class DatabaseHandler{
 				return array($subClass, 0);
 			}	
 		}catch(PDOException $e){
-			return 'Fehler bei der Anfrage: '.$e;
+			return 'Fehler bei der Anfrage!';
 		}
 	}
 	
 	// Gibt ein Array von CarBody-Objekten als Ergebnis einer freien Parametersuche zurück
 	
 	static public function getBodies($parameters){
-		$dbh = self::createConnection('localhost', 'cars', 'root', '');
+		$dbh = self::createConnection(self::$host, self::$schema, self::$user, self::$password);
 		$select = "SELECT * FROM bodies WHERE ";
 		// Überprüft, ob Parameter mit der richtigen Syntax - COLUMN=WERT - vorliegen
 		if(strpos($parameters, '=') !== false){
@@ -111,7 +111,7 @@ class DatabaseHandler{
 					if(strpos($ki[1], "'") !== false){
 						$select .= $ki[0]." LIKE ".$ki[1];
 					}else{
-						$select .= $ki[0]." = ".$ki[1];
+						$select .= $ki[0]."= ".$ki[1];
 					}
 					$select .= " AND ";
 				} 
@@ -123,7 +123,7 @@ class DatabaseHandler{
 				if(strpos($kv[1], "'") !== false){
 					$select .= $kv[0]." LIKE ".$kv[1];
 				}else{
-					$select .= $kv[0]." = ".$kv[1];
+					$select .= $kv[0]."= ".$kv[1];
 				}
 			}
 		}else{
@@ -143,15 +143,6 @@ class DatabaseHandler{
 			}
 		}catch(PDOException $e){
 			return 'Fehler bei Anfrage:'.$select;
-		}
-	}
-	
-	// Fügt eine Karosserie ind die Datenbank ein
-	static public function insertBody($parameters){
-		$dbh = self::createConnection('localhost', 'cars', 'root', '');
-		$insert = "INSERT INTO ";
-		if(strpos($parameters, '=') !== false){
-			
 		}
 	}
 }

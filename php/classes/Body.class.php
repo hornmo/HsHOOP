@@ -67,13 +67,6 @@ class CarBody {
 		}
 	}
 	
-	// Neue Karrosserie in die Datenbank einfügen
-	
-	public static function insertBody($parameters) {
-		$insert = DatabaseHandler::insertBody($parameters);
-		return $insert;
-	}
-	
 	// Gibt ein CarBody-Objekt als Array zurück
 	
 	public function getValues() { 
@@ -109,5 +102,5 @@ class CarBody {
 		}
 		return $retVal;
 		}
-	} 
+	}
 ?>

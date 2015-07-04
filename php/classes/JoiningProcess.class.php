@@ -13,7 +13,7 @@ class JoiningProcess {
 	// Gibt ein Objekt der Klasse für die gegebene Karosserie-ID zurück
 	
 	public static function getByID($id){
-		$joi = DatabaseHandler::getConnected("joining_process", $id);
+		$joi = DatabaseHandler::getConnected("joining_process", "JoiningProcess", $id);
 		return $joi;
 	}
 	

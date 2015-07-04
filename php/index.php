@@ -11,7 +11,7 @@ include_once("classes/Body.class.php");
 
 		<div id="main">
 			<p>
-				<a href="lists.php">Suche nach Kriterien</a>
+				<a href="select.php">Suche bestimmte Karosserie</a>
 			</p>
 			<p>
 				<form method="post">
@@ -22,7 +22,7 @@ include_once("classes/Body.class.php");
 						<div>Modell: </div><input name="name"></input>
 					</p>
 					<p>
-						<div>Modelljahr: </div><input name="model_year"></input>
+						<div>Modelljahr: </div><span>Von:</span><input name="f:model_year"></input><span>Bis:</span><input name="t:model_year"></input>
 					</p>
 					<p>
 						<span>Fahrzeugklasse: </span>
@@ -53,11 +53,15 @@ include_once("classes/Body.class.php");
 						foreach($atrs['_POST'] AS $k => $v){
 							if($v != ''){
 								$vars = true;
-								$l = array('manufacturer','name','internaloem','segment');
-								if(!in_array($k,$l)){
-									$parameters .= $k."=".$v;
+								if(strpos($k, "f:") !== false){
+									$k = substr($k, 2);	
+									$parameters .= $k." >=".$v;
+								}
+								elseif(strpos($k, "t:") !== false){
+									$k = substr($k, 2);
+									$parameters .= $k." <=".$v;
 								}else{
-									$parameters .= $k."='%".$v."%'"; 
+									$parameters .= $k."='%".$v."%'";
 								}
 								$parameters .= "&";
 							}

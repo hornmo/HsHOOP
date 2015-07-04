@@ -10,7 +10,7 @@ class Stiffness{
 	// Gibt ein Objekt der Klasse für die gegebene Karosserie-ID zurück	
 
 	public static function getByID($id){
-		$sti = DatabaseHandler::getConnected("stiffness", $id);
+		$sti = DatabaseHandler::getConnected("stiffness", "Stiffness", $id);
 		return $sti;
 	}
 	

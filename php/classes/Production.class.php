@@ -14,7 +14,7 @@ class Production {
 	// Gibt ein Objekt der Klasse für die gegebene Karosserie-ID zurück
 	
 	public static function getByID($id){
-		$dim = DatabaseHandler::getConnected("production", $id);
+		$dim = DatabaseHandler::getConnected("production", "Production", $id);
 		return $dim;
 	}
 	
