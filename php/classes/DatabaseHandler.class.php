@@ -57,7 +57,7 @@ class DatabaseHandler{
 	
 	static public function getBodyByID($id){
 		$dbh = self::createConnection(self::$host, self::$schema, self::$user, self::$password);
-		$select = "SELECT * FROM details WHERE ";
+		$select = "SELECT * FROM bodies WHERE ";
 		if($id){
 			$select .= "id_model = ".$id;
 		}
@@ -77,7 +77,7 @@ class DatabaseHandler{
 	
 	static public function getConnected($table, $subClass, $id){
 		$dbh = self::createConnection(self::$host, self::$schema, self::$user, self::$password);
-		$select = "SELECT * FROM ".$table." WHERE fk_model = ".$id." ";
+		$select = "SELECT * FROM v_".$table." WHERE fk_model = ".$id." ";
 		try{
 			$stmt = $dbh->prepare($select);
 			$stmt->execute();

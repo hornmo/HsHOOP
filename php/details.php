@@ -24,7 +24,7 @@ include_once("classes/Body.class.php");
 			echo '<tbody>';
 			foreach($body AS $k => $b){
 				echo '<td style="border:1px solid black;vertical-align:top;">';
-				echo '<table style="border-collapse:collapse;">';
+				echo '<table>';
 				echo '<thead>';
 				echo '</thead>';
 				echo '<tbody>';
