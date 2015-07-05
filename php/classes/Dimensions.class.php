@@ -31,6 +31,7 @@ class Dimensions{
 		$retVal = array_merge($retVal, ["track_mean"=>$this->track_mean]);
 		$retVal = array_merge($retVal, ["wheelbase"=>$this->wheelbase]);
 		$retVal = array_merge($retVal, ["contact_area"=>$this->contact_area]);
+		$retVal = array_merge($retVal, ["dimensions_total"=>$this->dimensions_total]);
 		return $retVal;
 	}
 }

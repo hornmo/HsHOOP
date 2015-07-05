@@ -40,16 +40,19 @@ class DatabaseHandler{
 			}
 			$select .="model_year LIKE '".$year."' ";
 		}
- 
-		$stmt =	$dbh->prepare($select);
-		$stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_CLASS, "CarBody");
-		if($result){
-			$user = User::get();
-			$result = $user->filterList($result);
-			return $result;
-		}else{
-			return 'Fehler!'.$man.$name.$year.'';
+		try{
+			$stmt =	$dbh->prepare($select);
+			$stmt->execute();
+			$result = $stmt->fetchAll(PDO::FETCH_CLASS, "CarBody");
+			if($result){
+				$user = User::get();
+				$result = $user->filterList($result);
+				return $result;
+			}else{
+				return 'Fehler!'.$man.$name.$year.'';
+			}
+		}catch(PDOException $e){
+			return 'Fehler bei der Anfrage!';
 		}
 	}
 	
@@ -61,15 +64,19 @@ class DatabaseHandler{
 		if($id){
 			$select .= "id_model = ".$id;
 		}
-		$stmt =	$dbh->prepare($select);
-		$stmt->execute();
-		$result = $stmt->fetchAll(PDO::FETCH_CLASS, "CarBody");
-		if($result){
-			$user = User::get();
-			$result = $user->filterList($result);
-			return $result[0];
-		}else{
-			return 'Fehler!'.$id;
+		try{
+			$stmt =	$dbh->prepare($select);
+			$stmt->execute();
+			$result = $stmt->fetchAll(PDO::FETCH_CLASS, "CarBody");
+			if($result){
+				$user = User::get();
+				$result = $user->filterList($result);
+				return $result[0];
+			}else{
+				return 'Fehler!'.$id;
+			}
+		}catch(PDOException $e){
+			return 'Fehler bei der Anfrage!';
 		}
 	}
 	

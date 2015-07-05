@@ -33,10 +33,11 @@ class CarBody {
 	
 	public static function suche($m, $n, $y){
 		$model = DatabaseHandler::getBodyByPars($m, $n, $y);
-		$model = $model[0];
-		$id = $model->id_model;
-
-		return $model;
+		if(is_object($model[0])){
+			$model = $model[0];
+			$id = $model->id_model;
+			return $model;
+		}
 	}
 	
 	// Gibt Objekt zurück mit allen Details

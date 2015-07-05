@@ -1,5 +1,5 @@
 
-CREATE VIEW bodies (manufacturer, name, model_year, sop, segment, internaloem, generation, id_model)
+CREATE VIEW bodies (manufacturer, name, model_year, internaloem, generation, sop, segment, id_model)
 	AS SELECT m.manufacturer, m.name, m.model_year, m.internaloem, m.generation, m.sop, m.segment, m.id_model
 		FROM model m
 	ORDER BY manufacturer;
@@ -9,13 +9,13 @@ CREATE VIEW bodies (manufacturer, name, model_year, sop, segment, internaloem, g
 -- View to see everything
 -- -----------------------------------------------------
 
-CREATE VIEW details (manufacturer, name, model_year, sop, segment, internaloem, generation, 
+CREATE VIEW details (id_model, manufacturer, name, model_year, sop, segment, internaloem, generation, 
 		process_stability, re_use_factor, mechanisation, intended_production_vol, production_lead_time,
 		length, width, height, track_front, track_rear, track_mean, wheelbase, contact_area, ltotal, 
 		biw, front_doors, rear_doors, hood, tailgate, front_fenders, hinges, fuelflap, frontend, wtotal, 
 		steel, aluminium, magnesium, other, thermoplastics, 
 		no_parts, parts100g, parts1kg, parts5kg, parts_more5kg)
-	AS SELECT m.manufacturer, m.name, m.model_year, m.internaloem, m.generation, m.sop, m.segment, 
+	AS SELECT m.id_model, m.manufacturer, m.name, m.model_year, m.internaloem, m.generation, m.sop, m.segment, 
 		pr.process_stability, pr.re_use_factor, pr.mechanisation, pr.intended_production_vol, pr.production_lead_time,
 		d.length, d.width, d.height, d.track_front, d.track_rear, d.track_mean, d.wheelbase, d.contact_area, d.total, 
 		w.biw, w.front_doors, w.rear_doors, w.hood, w.tailgate, w.front_fenders, w.hinges, w.fuelflap, w.frontend, w.total,
@@ -38,12 +38,12 @@ CREATE VIEW v_production (process_stability, re_use_factor, mechanisation, inten
 		FROM model m
 			JOIN production pr ON m.id_model = pr.fk_model;
 			
-CREATE VIEW v_dimensions (length, width, height, track_front, track_rear, track_mean, wheelbase, contact_area, total, fk_model)
+CREATE VIEW v_dimensions (length, width, height, track_front, track_rear, track_mean, wheelbase, contact_area, dimensions_total, fk_model)
 	AS SELECT d.length, d.width, d.height, d.track_front, d.track_rear, d.track_mean, d.wheelbase, d.contact_area, d.total, d.fk_model
 		FROM model m
 			JOIN dimensions d ON m.id_model = d.fk_model;
 			
-CREATE VIEW v_weights (biw, front_doors, rear_doors, hood, tailgate, front_fenders, hinges, fuelflap, frontend, total, fk_model)
+CREATE VIEW v_weights (biw, front_doors, rear_doors, hood, tailgate, front_fenders, hinges, fuelflap, frontend, weight_total, fk_model)
 	AS SELECT w.biw, w.front_doors, w.rear_doors, w.hood, w.tailgate, w.front_fenders, w.hinges, w.fuelflap, w.frontend, w.total, w.fk_model
 		FROM model m
 			JOIN weights w ON m.id_model = w.fk_model;
