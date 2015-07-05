@@ -61,13 +61,12 @@ Class Results{
 		}
 	}
 	public static function showDetails($id = NULL){
-			if(isset($_GET['id'])){
-				$id = $_GET['id'];
-			}
-			if($id != 'ID'){
-				$body = CarBody::showDetails($id);
-				$body = $body->getValues();
-			}
+		if(isset($_GET['id'])){
+			$id = $_GET['id'];
+		}
+		if($id){
+			$body = CarBody::showDetails($id);
+			$body = $body->getValues();
 			echo '<table>';
 			echo '<thead>';
 			foreach($body AS $k => $b){
@@ -90,6 +89,7 @@ Class Results{
 			}
 			echo '</tbody>';
 			echo '<table>';
+		}
 	}
 }
 ?>

@@ -105,7 +105,7 @@ class DatabaseHandler{
 	
 	static public function getBodies($parameters){
 		$dbh = self::createConnection(self::$host, self::$schema, self::$user, self::$password);
-		$select = "SELECT * FROM bodies WHERE ";
+		$select = "SELECT * FROM details WHERE ";
 		// Überprüft, ob Parameter mit der richtigen Syntax - COLUMN=WERT - vorliegen
 		if(strpos($parameters, '=') !== false){
 			// Überprüft, ob mehrere Parameter vorliegen - Getrennt durch '&'

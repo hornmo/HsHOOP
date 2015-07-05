@@ -11,11 +11,11 @@ CREATE VIEW bodies (manufacturer, name, model_year, internaloem, generation, sop
 
 CREATE VIEW details (id_model, manufacturer, name, model_year, sop, segment, internaloem, generation, 
 		process_stability, re_use_factor, mechanisation, intended_production_vol, production_lead_time,
-		length, width, height, track_front, track_rear, track_mean, wheelbase, contact_area, ltotal, 
-		biw, front_doors, rear_doors, hood, tailgate, front_fenders, hinges, fuelflap, frontend, wtotal, 
+		length, width, height, track_front, track_rear, track_mean, wheelbase, contact_area, dimensions_total, 
+		biw, front_doors, rear_doors, hood, tailgate, front_fenders, hinges, fuelflap, frontend, weight_total, 
 		steel, aluminium, magnesium, other, thermoplastics, 
 		no_parts, parts100g, parts1kg, parts5kg, parts_more5kg)
-	AS SELECT m.id_model, m.manufacturer, m.name, m.model_year, m.internaloem, m.generation, m.sop, m.segment, 
+	AS SELECT m.id_model, m.manufacturer, m.name, m.model_year, m.sop, m.segment, m.internaloem, m.generation,
 		pr.process_stability, pr.re_use_factor, pr.mechanisation, pr.intended_production_vol, pr.production_lead_time,
 		d.length, d.width, d.height, d.track_front, d.track_rear, d.track_mean, d.wheelbase, d.contact_area, d.total, 
 		w.biw, w.front_doors, w.rear_doors, w.hood, w.tailgate, w.front_fenders, w.hinges, w.fuelflap, w.frontend, w.total,
